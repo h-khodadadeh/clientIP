@@ -27,6 +27,9 @@ func InitGin() *gin.Engine {
 	ginEngine := gin.New()
 
 	ginEngine.GET("/print", func(context *gin.Context) {
+		_, _ = context.Writer.WriteString("client's real IP: ")
+		_, _ = context.Writer.WriteString(context.ClientIP())
+		_, _ = context.Writer.WriteString("\n")
 		data, err := httputil.DumpRequest(context.Request, true)
 		if err != nil {
 			_, _ = context.Writer.WriteString(err.Error())
